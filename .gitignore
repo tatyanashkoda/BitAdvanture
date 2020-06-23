@@ -1,0 +1,7 @@
+.idea*
+*.iml
+config/
+*.patch
+*.properties
+outputCPD.xml
+pmd.xml

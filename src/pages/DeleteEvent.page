@@ -1,0 +1,38 @@
+<apex:page controller="DeleteEventByLinkController">
+
+    <script type="text/javascript">
+        function closeWin() {
+            window.close();
+        }
+    </script>
+
+    <style>
+
+        .detailList {
+            font-size: 15px;
+            text-align: center;
+        }
+
+    </style>
+    <div align="center" style="margin-top: 15px">
+        <apex:form style="background-color:#D8DDE7;width:500px">
+            <br/>
+            <div style="align-content: center; font-size: 25px">
+                Event
+            </div>
+            <div class="detailList">
+                <apex:pageBlock >
+                    <apex:pageBlockSection columns="1">
+                        <apex:outputField value="{! CustomEvents.Start_Time__c }"/>
+                        <apex:outputField value="{! CustomEvents.End_Time__c }"/>
+                        <apex:outputText style="white-space:pre-wrap;" escape="false"
+                                         value="{! CustomEvents.Subject__c }"/>
+                    </apex:pageBlockSection>
+                    <div align="center" draggable="false">
+                        <apex:commandButton value="Delete Event" action="{!deleteEvent}" oncomplete="closeWin();"/>
+                    </div>
+                </apex:pageBlock>
+            </div>
+        </apex:form>
+    </div>
+</apex:page>

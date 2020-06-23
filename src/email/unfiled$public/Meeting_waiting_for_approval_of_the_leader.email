@@ -1,0 +1,4 @@
+<h2>Dear {!Contact.FirstName} {!Contact.LastName}.</h2><br/>
+This email is to confirm your meeting that was scheduled on {!Custom_Event__c.CreatedBy} , {!Custom_Event__c.Start_Time__c} - {!Custom_Event__c.End_Time__c} with the subject: {!Custom_Event__c.Subject__c}  
+If you were agree, you should approve it using the following link:
+<a href="https://bitadventure-dev-ed.lightning.force.com/lightning/r/Custom_Event__c/{!Custom_Event__c.Id}/view")">redirect on Event page</a>

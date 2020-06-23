@@ -1,0 +1,155 @@
+<apex:page showHeader="false" sidebar="false"  applyBodyTag="false" applyHtmlTag="false" standardStylesheets="false" controller="CalendarController">
+    <apex:stylesheet value="{!$Resource.fcalendarmincss}"/>
+    <apex:stylesheet value="{!$Resource.jqueryMinCss}"/>
+    <apex:includeScript value="{!URLFOR($Resource.fullcalendar,'/fullcalendar/jquery.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.fullcalendar,'/fullcalendar/jquery-ui.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.fullcalendar,'/fullcalendar/moment.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.fullcalendar,'/fullcalendar/fullcalendar.min.js')}"/>
+    <apex:includeScript value="{!$Resource.FullCalendarDemo}"/>
+
+    <html>
+    <head>
+        <apex:slds />
+        <style>
+            .vf-header {
+                padding-left: 20px;
+                background-color: lightgrey;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                font-weight: bold;
+                font-family:segoe ui;
+            }
+
+            .vf-input-element {
+                margin-left: 20px;
+            }
+            .error {
+                color: red;
+            }
+            .error input,
+            .error textarea {
+                border: 1px solid red;
+            }
+
+        </style>
+    </head>
+    <body>
+    <div class="vf-header">
+        <apex:sectionHeader title="Calendar"/>
+    </div>
+
+    <div style="width:100%">
+        <div id='calendar' style="width:65%; padding:20px; float:left"></div>
+    </div>
+    <div style="width:20%; padding:20px; float:right;font-family:segoe ui">
+        <div class="vf-header" style="font-family:segoe ui; text-align: center">Information</div>
+        <p style="font-size: medium; font-family: font-family:segoe ui"> When creating a meeting, pay attention to the free time manager. It is displayed in green.
+        </p>
+        <p style="font-size: medium; font-family: font-family:segoe ui">
+            You can make a meeting for at least half an hour.
+        </p>
+    </div>
+    <div id="dialog" title="Create New Event" style="display:none">
+        <form id="newEventForm">
+            <table>
+                <tr>
+                    <td>First Name</td>
+                    <td><input name="firstName" required="true" type="text" id="createContactFirstName" style="margin:5px"/></td>
+                </tr>
+                <tr>
+                    <td>Last Name</td>
+                    <td><input name = "lastName" required="true" type="text" id="createContactLastName" style="margin:5px"/></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input name = "email" required="true" type="email" id="createContactEmail" style="margin:5px"/></td>
+                </tr>
+                <tr>
+                    <td>Start Time</td>
+                    <td><input name="startTime" required="true" type="datetime" id="createStartTime" style="margin:5px"/></td>
+                </tr>
+                <tr>
+                    <td>End Time</td>
+                    <td><input name = "endTime" required="true" type="datetime" id="createEndTime" style="margin:5px"/></td>
+                </tr>
+                <tr>
+                    <td>Subject</td>
+                    <td><input name="subject" required="true" type="text" id="createEventSubject" style="margin:5px"/></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Create Event" style="margin:5px"/></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <script>
+
+        var lightningDomain = "https://businesscalendar-dev-ed--c.visualforce.com/";
+
+        $(document).ready(function () {
+            attachListners();
+            const calendar = CalendarSingleton.getCalendar();
+            getEvents(calendar);
+            getFreeTimes(calendar);
+            $("#createStartTime,#createEndTime,#updateStartTime,#updateEndTime").datepicker();
+        });
+        function getFreeTimes() {
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.CalendarController.getFreeTimes}',
+                function (result, event) {
+                    console.log("getFreeTimes()", result);
+                    if (event.status) {
+                        getFreeTime(result, calendar);
+                    } else if (event.type === 'exception') {
+                        console.error(`${event.message} ${event.where}`);
+                    } else {
+                        console.error(`${event.message}`);
+                    }
+                },
+                {escape: true}
+            );
+        }
+
+        function getEvents() {
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.CalendarController.getEvents}',
+                function (result, event) {
+                    console.log("getEvents()", result);
+                    if (event.status) {
+                        addEvents(result, calendar);
+                    } else if (event.type === 'exception') {
+                        console.error(`${event.message} ${event.where}`);
+                    } else {
+                        console.error(`${event.message}`);
+                    }
+                },
+                {escape: true}
+            );
+        }
+
+        function createOrUpdateEvents(calendarEvent) {
+            console.log("createOrUpdateEvents", calendarEvent);
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.CalendarController.createOrUpdateEvents}',
+                calendarEvent,
+                function (result, event) {
+                    if (event.status) {
+                        console.log("createOrUpdateEvents", result);
+                        addEvents(result, calendar);
+                    } else if (event.type === 'exception') {
+                        console.error(`${event.message} ${event.where}`);
+                    } else {
+                        console.error(`${event.message}`);
+                    }
+                },
+                {escape: true}
+            );
+        }
+
+    </script>
+    </body>
+    </html>
+    <apex:pageMessage severity="error"/>
+</apex:page>

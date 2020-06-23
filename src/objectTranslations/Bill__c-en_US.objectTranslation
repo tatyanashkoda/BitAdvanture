@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Bill</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Bills</value>
+    </caseValues>
+    <fields>
+        <label><!-- Amount --></label>
+        <name>Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Create transaction --></label>
+        <name>Create_transaction__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Developer --></label>
+        <name>Developer__c</name>
+        <relationshipLabel><!-- Bills --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Due date --></label>
+        <name>Due_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Milestone --></label>
+        <name>Milestone_Developer__c</name>
+        <relationshipLabel><!-- Bills --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Paid --></label>
+        <name>Paid__c</name>
+    </fields>
+    <fields>
+        <label><!-- Transaction --></label>
+        <name>Transaction__c</name>
+        <relationshipLabel><!-- Bills --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Bill Layout Developer payment</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Information --></label>
+            <section>Information</section>
+        </sections>
+        <sections>
+            <label><!-- Paid --></label>
+            <section>Paid</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Bill Layout Incoming Payment</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Information --></label>
+            <section>Information</section>
+        </sections>
+        <sections>
+            <label><!-- Paid --></label>
+            <section>Paid</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Bill Layout Money Flow</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+        <sections>
+            <label><!-- Information --></label>
+            <section>Information</section>
+        </sections>
+        <sections>
+            <label><!-- Paid --></label>
+            <section>Paid</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Bill Layout for Other Expense</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Information --></label>
+            <section>Information</section>
+        </sections>
+        <sections>
+            <label><!-- Paid --></label>
+            <section>Paid</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Developer payment --></label>
+        <name>Developer_payment</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Incoming Payment --></label>
+        <name>Incoming_Payment</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Money Flow --></label>
+        <name>Money_Flow</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Other Expense --></label>
+        <name>Other_Expense</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- The field &quot;Amount&quot; cannot be less zero --></errorMessage>
+        <name>Check_amount</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The field &quot;Due date&quot; cannot be less than the field &quot;Created Date &quot; --></errorMessage>
+        <name>Check_on_date</name>
+    </validationRules>
+</CustomObjectTranslation>

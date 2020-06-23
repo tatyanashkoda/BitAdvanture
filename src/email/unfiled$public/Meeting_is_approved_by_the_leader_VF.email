@@ -1,0 +1,14 @@
+<messaging:emailTemplate subject="Meeting confirmation" recipientType="Contact" relatedToType="Custom_Event__c">
+    <messaging:htmlEmailBody >
+    <html>
+            <body>
+                <h2> Dear {!relatedTo.Contact__r.Name}, </h2>
+
+                <p>This email is to inform you that the meeting with  {!relatedTo.Attached_to__r.Name} scheduled for {!relatedTo.Start_Time__c} - {!relatedTo.End_Time__c}  with the subject: "{!relatedTo.Subject__c}" has been accepted.</p>
+
+                <p>If for any reason you are unable to attend the meeting, please cancel it using the following link <a href="https://bitadventure-dev-ed--c.ap4.visual.force.com/apex/DeleteEvent?id={!relatedTo.Id}">Delete Event</a>
+                </p>
+            </body>
+        </html>      
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

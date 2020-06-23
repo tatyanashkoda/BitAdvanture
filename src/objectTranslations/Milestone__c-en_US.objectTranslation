@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Milestone</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Milestones</value>
+    </caseValues>
+    <fields>
+        <label><!-- Cost --></label>
+        <name>Cost__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Developing cost --></label>
+        <name>Developing_cost__c</name>
+    </fields>
+    <fields>
+        <label><!-- Due date --></label>
+        <name>Due_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fees Percent --></label>
+        <name>Fees_Percent_For_Upwork__c</name>
+        <picklistValues>
+            <masterLabel>0</masterLabel>
+            <translation><!-- 0 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10</masterLabel>
+            <translation><!-- 10 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15</masterLabel>
+            <translation><!-- 15 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20</masterLabel>
+            <translation><!-- 20 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3.4</masterLabel>
+            <translation><!-- 3.4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5</masterLabel>
+            <translation><!-- 5 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Fees Percent --></label>
+        <name>Fees_Percent__c</name>
+    </fields>
+    <fields>
+        <label><!-- Finished --></label>
+        <name>Finished__c</name>
+    </fields>
+    <fields>
+        <label><!-- Finished by --></label>
+        <name>Finished_by__c</name>
+    </fields>
+    <fields>
+        <label><!-- Money without charges Currency --></label>
+        <name>Money_without_charges_Currency__c</name>
+    </fields>
+    <fields>
+        <label><!-- Money without charges --></label>
+        <name>Money_without_charges__c</name>
+    </fields>
+    <fields>
+        <label><!-- Organisation --></label>
+        <name>Organisation__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profit Currency --></label>
+        <name>Profit_Currency__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profit --></label>
+        <name>Profit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Project --></label>
+        <name>Project__c</name>
+        <relationshipLabel><!-- Milestones --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Start date --></label>
+        <name>Start_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Closed</masterLabel>
+            <translation><!-- Closed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In progress</masterLabel>
+            <translation><!-- In progress --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Review</masterLabel>
+            <translation><!-- Review --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Upcoming</masterLabel>
+            <translation><!-- Upcoming --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Milestone Layout</layout>
+        <sections>
+            <label><!-- Budget --></label>
+            <section>Budget</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Dates --></label>
+            <section>Dates</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Milestone Page Layouts for Upwork</layout>
+        <sections>
+            <label><!-- Budget --></label>
+            <section>Budget</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Dates --></label>
+            <section>Dates</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Other --></label>
+        <name>Other</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Upwork --></label>
+        <name>Upwork</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Field value cannot be negative --></errorMessage>
+        <name>Check_Cost_on_negative_value</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Start date could not be more Due date --></errorMessage>
+        <name>Check_Dates</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Field value cannot be negative --></errorMessage>
+        <name>Check_Developing_cost_on_negative_value</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Incorrect Sales Percent --></errorMessage>
+        <name>check_for_Sales_Percent</name>
+    </validationRules>
+</CustomObjectTranslation>

@@ -1,0 +1,5 @@
+<h2> Dear {!Custom_Event__c.Contact__c}, </h2></br>
+
+This email is to inform you that the meeting with  {!Custom_Event__c.Attached_to__c} scheduled for {!Custom_Event__c.Start_Time__c} - {!Custom_Event__c.End_Time__c}  with the subject:  {!Custom_Event__c.Subject__c} has been accepted.
+
+If for any reason you are unable to attend the meeting, please cancel it using the following link <a href="https://bitadventure-dev-ed--c.ap4.visual.force.com/apex/DeleteEvent?id={!Custom_Event__c.Id}">Delete Event</a>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Transaction</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Transactions</value>
+    </caseValues>
+    <fields>
+        <label><!-- Amount --></label>
+        <name>Budget__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date of Payment --></label>
+        <name>Date_of_Payment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Developer --></label>
+        <name>Developer__c</name>
+        <relationshipLabel><!-- Transactions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- From Account --></label>
+        <name>From_Account__c</name>
+        <relationshipLabel><!-- Transactions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Milestone --></label>
+        <name>Milestone__c</name>
+        <relationshipLabel><!-- Transactions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- To Account --></label>
+        <name>To_Account__c</name>
+        <relationshipLabel><!-- Transactions (To Account) --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Transaction Layout Incoming Payment</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Transaction Layout for Money Flow</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Transaction Layout for Other Expense</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Transaction Layout for developers</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Developer payment --></label>
+        <name>Developer_payment</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Incoming Payment --></label>
+        <name>Incoming_Payment</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Money Flow --></label>
+        <name>Money_Flow</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Other Expense --></label>
+        <name>Other_Expense</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Amount value must be positive --></errorMessage>
+        <name>Check_on_negative_value</name>
+    </validationRules>
+</CustomObjectTranslation>

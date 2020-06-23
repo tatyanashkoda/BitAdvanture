@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Project</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Projects</value>
+    </caseValues>
+    <fields>
+        <label><!-- Budget Status --></label>
+        <name>Budget_Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer --></label>
+        <name>Customer__c</name>
+        <relationshipLabel><!-- Projects --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Developer Salary --></label>
+        <name>Developer_Salary__c</name>
+    </fields>
+    <fields>
+        <label><!-- Developing cost --></label>
+        <name>Developing_cost__c</name>
+    </fields>
+    <fields>
+        <label><!-- Due date --></label>
+        <name>Due_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fnished by --></label>
+        <name>Finished_by__c</name>
+    </fields>
+    <fields>
+        <label><!-- Margin --></label>
+        <name>Margin__c</name>
+    </fields>
+    <fields>
+        <label><!-- Money without charges --></label>
+        <name>Money_without_charges__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profit --></label>
+        <name>Profit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Project budget --></label>
+        <name>Project_budget__c</name>
+    </fields>
+    <fields>
+        <label><!-- Project is finished --></label>
+        <name>Project_is_finished__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Closed</masterLabel>
+            <translation><!-- Closed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In progress</masterLabel>
+            <translation><!-- In progress --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Review</masterLabel>
+            <translation><!-- Review --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Upcoming</masterLabel>
+            <translation><!-- Upcoming --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Whole Amount --></label>
+        <name>Whole_Amount__c</name>
+    </fields>
+    <layouts>
+        <layout>Project Layout</layout>
+        <sections>
+            <label><!-- Current Budget --></label>
+            <section>Current Budget</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Dates --></label>
+            <section>Dates</section>
+        </sections>
+        <sections>
+            <label><!-- Expected Budget --></label>
+            <section>Expected Budget</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

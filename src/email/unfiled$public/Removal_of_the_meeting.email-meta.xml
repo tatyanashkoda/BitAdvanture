@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Removal of the meeting</name>
+    <style>none</style>
+    <subject>Removal of the meeting</subject>
+    <textOnly>Dear {!Contact.FirstName} {!Contact.LastName}.
+This email was be sent because meeting  {!Custom_Event__c.Start_Time__c} - {!Custom_Event__c.End_Time__c}  was be removed.</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

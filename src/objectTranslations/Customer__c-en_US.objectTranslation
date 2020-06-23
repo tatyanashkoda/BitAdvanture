@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Customer</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Customers</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- Customers --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Count current project --></label>
+        <name>Count_current_project__c</name>
+    </fields>
+    <fields>
+        <label><!-- Count finished project --></label>
+        <name>Count_finished_project__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Email --></label>
+        <name>Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Photo --></label>
+        <name>Photo__c</name>
+    </fields>
+    <fields>
+        <label><!-- Skype --></label>
+        <name>Skype__c</name>
+    </fields>
+    <fields>
+        <label><!-- Social --></label>
+        <name>Social__c</name>
+    </fields>
+    <layouts>
+        <layout>Customer Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Project information --></label>
+            <section>Project information</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

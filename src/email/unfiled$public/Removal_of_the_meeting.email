@@ -1,0 +1,3 @@
+<h2>Dear {!Contact.FirstName} {!Contact.LastName}.</h2><br/>
+
+This email was be sent because meeting  {!Custom_Event__c.Start_Time__c} - {!Custom_Event__c.End_Time__c}  was be removed.

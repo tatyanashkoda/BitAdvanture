@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Developer Work</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Developer Works</value>
+    </caseValues>
+    <fields>
+        <label><!-- Cost Per Hour --></label>
+        <name>Cost_Per_Hour__c</name>
+    </fields>
+    <fields>
+        <label><!-- Developing cost --></label>
+        <name>Developing_cost__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Hours --></label>
+        <name>Number_of_Hours__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,11 @@
+<messaging:emailTemplate subject="Meeting rejection" recipientType="Contact" relatedToType="Custom_Event__c">
+            <messaging:htmlEmailBody >
+        <html>
+            <body>
+                <h2>Dear {!relatedTo.Contact__r.Name},</h2>
+
+                <p>This email is to inform you that the meeting with  {!relatedTo.Attached_to__r.Name} scheduled for {!relatedTo.Start_Time__c} - {!relatedTo.End_Time__c} with the subject: "{!relatedTo.Subject__c}" has been declined.</p>
+            </body>
+        </html>
+            </messaging:htmlEmailBody>
+</messaging:emailTemplate>

@@ -1,0 +1,16 @@
+<messaging:emailTemplate subject="Meeting is approved by the leader" 
+    recipientType="Contact" 
+    relatedToType="Custom_Event__c">
+    
+    <messaging:htmlEmailBody >
+        <html>
+            <body>
+                <h4>Hello </h4>
+                <p>This email is to confirm your meeting that was scheduled on {!relatedTo.Start_Time__c} - {!relatedTo.End_Time__c} with the subject: "{!relatedTo.Subject__c}".</p> 
+                If you were agree, you should approve it using the following link:
+                <p><a href="https://bitadventure-dev-ed.lightning.force.com/lightning/r/Custom_Event__c/{!relatedTo.Id}/view">redirect on Event page</a>
+                </p>
+            </body>
+        </html>
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

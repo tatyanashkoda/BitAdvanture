@@ -1,0 +1,73 @@
+<!--
+ - Created by tshkoda on 5/28/2020.
+ -->
+
+<aura:component description="UpdateBillNew" controller="BillController"
+                implements="lightning:actionOverride,force:hasRecordId,force:hasSObjectName,force:lightningQuickAction,flexipage:availableForRecordHome">
+    <aura:attribute name="billRecord" type="Bill__c"/>
+    <aura:attribute name="newBill" type="Bill__c"/>
+    <aura:attribute name="newAmount" type="Decimal"/>
+    <aura:attribute name="recordTypeName" type="String" default=""/>
+    <aura:attribute name="transaction" type="Boolean" default="false"/>
+    <aura:attribute name="recordSaveError"
+                    type="String"
+                    description="An error message bound to force:recordData"/>
+    <force:recordData aura:id="recordEditor"
+                      layoutType="FULL"
+                      recordId="{!v.recordId}"
+                      targetFields="{!v.billRecord}"
+                      mode="EDIT"
+                      targetError="{!v.recordSaveError}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <lightning:card iconName="standard:account" title="Edit Bill">
+        <div class="slds-p-horizontal--small">
+            <p class="slds-text-heading--small">
+                <lightning:input type="date" label="Due date" value="{!v.billRecord.Due_date__c}"/>
+            </p>
+            <p class="slds-text-heading--small">
+                <lightning:input aura:id="amountBill" label="Amount" value="{!v.billRecord.Amount__c}"/>
+            </p>
+            <p class="slds-text-heading--small">
+                <lightning:input label="Description" value="{!v.billRecord.Description__c}"/>
+            </p>
+            <aura:if isTrue="{!v.recordTypeName == 'Money Flow' || v.recordTypeName == 'Incoming Payment'}">
+                <p class="slds-text-heading--small">
+                    <lightning:input label="Current Developer" type="search" value="{!v.billRecord.Developer__r.Name}"
+                                     disabled="true"/>
+                </p>
+            </aura:if>
+            <aura:if isTrue="{!v.recordTypeName == 'Developer payment'}">
+                <p class="slds-text-heading--small">
+                    <lightning:input label="Current Milestone" value="{!v.billRecord.Milestone_Developer__r.Name}"
+                                     disabled="true"/>
+                </p>
+                <p class="slds-text-heading--small">
+                    <lightning:input label="Current Developer" type="search" value="{!v.billRecord.Developer__r.Name}"
+                                     disabled="true"/>
+                </p>
+            </aura:if>
+            <p class="slds-text-heading--small">
+                <ui:inputCheckbox label="Create transaction" value="{!v.billRecord.Create_transaction__c}"/>
+            </p>
+            <p class="slds-text-heading--small">
+                <ui:inputCheckbox aura:id="paid" label="Paid" value="{!v.billRecord.Paid__c}"/>
+            </p>
+            <br/>
+            <aura:if isTrue="{!not(empty(v.recordSaveError))}">
+                <div class="slds-form-element slds-has-error">
+                    <div class="slds-form-element__help" id="form-error-01">
+                        {!v.recordSaveError}
+                    </div>
+                </div>
+            </aura:if>
+
+            <lightning:button label="Update" variant="brand" onclick="{!c.handleUpdateRecord}"/>
+            <br/>
+
+            <aura:if isTrue="{!v.transaction}">
+                <c:CreateTransaction recordTypeName="{!v.recordTypeName}" billRecord="{!v.newBill}"/>
+            </aura:if>
+        </div>
+    </lightning:card>
+</aura:component>

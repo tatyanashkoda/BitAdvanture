@@ -1,0 +1,65 @@
+<!--
+ - Created by tshkoda on 5/29/2020.
+ -->
+
+<aura:component description="CreateTransaction"
+                implements="force:appHostable,flexipage:availableForRecordHome,force:hasRecordId"
+                access="global"
+                controller="TransactionController">
+    <aura:attribute name="newTransaction" type="Transactions__c" default="{'sobject':'Transactions__c'}"/>
+    <aura:attribute name="newTransactionError" type="String"/>
+    <aura:attribute name="recordTypeName" type="String" default=""/>
+    <aura:attribute name="recordTypeId" type="String" default=""/>
+
+    <aura:attribute name="amount" type="Decimal" default=""/>
+    <aura:attribute name="billRecord" type="Bill__c"/>
+
+    <aura:attribute name="lookUpRecordDeveloper" type="sObject" default="{}"/>
+    <aura:attribute name="lookUpRecordMilestone" type="sObject" default="{}"/>
+    <aura:attribute name="lookUpRecordToAccount" type="sObject" default="{}"/>
+    <aura:attribute name="lookUpRecordFromAccount" type="sObject" default="{}"/>
+
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <lightning:card iconName="action:new_contact" title="Create Transaction">
+        <div>
+            <p class="slds-text-heading--small">
+                <lightning:input type="date" label="Date of Payment" value="{!v.newTransaction.Date_of_Payment__c}"/>
+            </p>
+            <p class="slds-text-heading--small">
+                <lightning:input aura:id="amount" label="Amount" value="{!v.newTransaction.Budget__c}"/>
+            </p>
+            <p class="slds-text-heading--small">
+                <lightning:input aura:id="amount" label="Description" value="{!v.newTransaction.Description__c}"/>
+            </p>
+            <!--            <aura:if isTrue="{!v.recordTypeName == 'Developer payment'}">-->
+            <!--                <p class="slds-text-heading&#45;&#45;small">-->
+            <!--                    <lightning:input label="Current Developer" type="search" value="{!v.newTransaction.Developer__c}"/>-->
+            <!--                </p>-->
+            <!--            </aura:if>-->
+            <!--            <aura:if isTrue="{!v.recordTypeName == 'Developer payment' || v.recordTypeName == 'Incoming Payment'}">-->
+            <!--                <lightning:input label="Current Milestone" type="search" value="{!v.newTransaction.Milestone__r.Name}"/>-->
+            <!--                </p>-->
+            <!--            </aura:if>-->
+            <aura:if isTrue="{!v.recordTypeName == 'Developer payment' || v.recordTypeName == 'Money Flow'
+                                                                        || v.recordTypeName == 'Other Expense'}">
+                <c:CustomLookup objectAPIName="Bank_Account__c" IconName="standard:account" label="From Account Name"
+                                selectedRecord="{!v.lookUpRecordFromAccount}"/>
+            </aura:if>
+            <aura:if isTrue="{!v.recordTypeName == 'Incoming Payment' || v.recordTypeName == 'Money Flow'}">
+                <c:CustomLookup objectAPIName="Bank_Account__c" IconName="standard:account" label="To Account Name"
+                                selectedRecord="{!v.lookUpRecordToAccount}"/>
+            </aura:if>
+            <br/>
+            <lightning:button label="Create" variant="brand" onclick="{!c.saveTransactionRecord}"/>
+            <br/>
+        </div>
+    </lightning:card>
+    <!-- Display Lightning Data Service errors -->
+    <aura:if isTrue="{!not(empty(v.newTransactionError))}">
+        <div class="recordError">
+            {!v.newTransactionError}
+        </div>
+    </aura:if>
+</aura:component>

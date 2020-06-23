@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Meeting is disapproved by the leader</name>
+    <style>none</style>
+    <subject>Meeting rejection:{!Custom_Event__c.Start_Time__c} - {!Custom_Event__c.End_Time__c}</subject>
+    <textOnly>Dear {!Custom_Event__c.Contact__c}, This email is to inform you that the meeting with  {!Custom_Event__c.Attached_to__c} scheduled for {!Custom_Event__c.Start_Time__c} - {!Custom_Event__c.End_Time__c} with the subject: {!Custom_Event__c.Subject__c} has been declined.</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

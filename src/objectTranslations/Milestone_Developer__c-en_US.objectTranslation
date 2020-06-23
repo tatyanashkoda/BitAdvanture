@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Milestone Developer</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Milestones Developers</value>
+    </caseValues>
+    <fields>
+        <label><!-- Cost Per Hour --></label>
+        <name>Cost_Per_Hour__c</name>
+    </fields>
+    <fields>
+        <label><!-- Developer Work --></label>
+        <name>Developer_Work__c</name>
+        <relationshipLabel><!-- Milestones Developers --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Developer --></label>
+        <name>Developer__c</name>
+        <relationshipLabel><!-- Milestones Developers --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Developing cost --></label>
+        <name>Developing_cost__c</name>
+    </fields>
+    <fields>
+        <label><!-- Milestone --></label>
+        <name>Milestone__c</name>
+        <relationshipLabel><!-- Milestones Developers --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Number of Hours --></label>
+        <name>Number_of_Hours__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Amount --></label>
+        <name>Total_Amount__c</name>
+    </fields>
+    <layouts>
+        <layout>Milestone Developer Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Milestone Developer Layout Fixed Cost</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Early developing cost --></label>
+        <name>Early_developing_cost</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Fixed developing cost --></label>
+        <name>Fixed_developing_cost</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

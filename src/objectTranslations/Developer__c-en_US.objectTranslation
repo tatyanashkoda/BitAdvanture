@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Developer</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Developers</value>
+    </caseValues>
+    <fields>
+        <label><!-- CV --></label>
+        <name>CV__c</name>
+    </fields>
+    <fields>
+        <label><!-- Email --></label>
+        <name>Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hours per week --></label>
+        <name>Hours_per_week__c</name>
+    </fields>
+    <fields>
+        <label><!-- Notes --></label>
+        <name>Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Phone --></label>
+        <name>Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Photo --></label>
+        <name>Photo__c</name>
+    </fields>
+    <fields>
+        <label><!-- Salary --></label>
+        <name>Salary__c</name>
+    </fields>
+    <fields>
+        <label><!-- Skype --></label>
+        <name>Skype__c</name>
+    </fields>
+    <fields>
+        <label><!-- Social --></label>
+        <name>Social__c</name>
+    </fields>
+    <layouts>
+        <layout>Developer Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Personal information --></label>
+            <section>Personal information</section>
+        </sections>
+        <sections>
+            <label><!-- Working information --></label>
+            <section>Working information</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Hours per week can&apos;t more 168 --></errorMessage>
+        <name>check_Hours_per_week</name>
+    </validationRules>
+</CustomObjectTranslation>
