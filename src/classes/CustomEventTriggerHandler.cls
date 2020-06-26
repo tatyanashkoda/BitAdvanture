@@ -4,12 +4,6 @@ public with sharing class CustomEventTriggerHandler extends TriggerHandler {
         checkStatus();
     }
 
-    private void deleteEvant() {
-        Id id = ApexPages.currentPage().getParameters().get('id');
-        Custom_Event__c customEvent = [SELECT Start_Time__c, End_Time__c, Id, Subject__c, Attached_to__c FROM Custom_Event__c WHERE Id = :id];
-
-    }
-
     private void checkStatus() {
 
         List<Custom_Event__c> customEvents = trigger.new;

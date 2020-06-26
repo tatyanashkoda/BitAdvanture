@@ -6,7 +6,6 @@ global with sharing class ResponsiveCalendarCtrl {
         todaysdate = system.now().format('yyyy-MM-dd');
     }
 
-
     @RemoteAction
     global static list<calendarWrapper> getCalendarItems() {
         list<calendarWrapper> lstcalendar = new list<calendarWrapper>();

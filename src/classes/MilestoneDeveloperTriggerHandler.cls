@@ -14,11 +14,10 @@ public with sharing class MilestoneDeveloperTriggerHandler extends TriggerHandle
         updateDevelopingCostAtCreation((List<Milestone_Developer__c>) Trigger.new);
     }
 
-    public  override void afterDelete(){
+    public override void afterDelete() {
         updateDevelopingCostAtCreation((List<Milestone_Developer__c>) Trigger.old);
     }
-
-
+    
     private void renameMilestoneDeveloper(List<Milestone_Developer__c> milestoneDevelopers) {
         for (Milestone_Developer__c msDev : milestoneDevelopers) {
             Developer__c developer = [SELECT Id, Name FROM Developer__c WHERE Id = :msDev.Developer__c];
@@ -47,8 +46,8 @@ public with sharing class MilestoneDeveloperTriggerHandler extends TriggerHandle
 
         Milestone__c milestone = [SELECT Id, Developing_cost__c, (Select Id, Name, Developing_cost__c,Total_Amount__c From Milestones_Developers__r) FROM Milestone__c WHERE Id = :msDev.Milestone__c];
         milestone.Developing_cost__c = 0;
-        if(!milestone.Milestones_Developers__r.isEmpty()){
-            for(Milestone_Developer__c msDeveloper : milestone.Milestones_Developers__r){
+        if (!milestone.Milestones_Developers__r.isEmpty()) {
+            for (Milestone_Developer__c msDeveloper : milestone.Milestones_Developers__r) {
                 milestone.Developing_cost__c = milestone.Developing_cost__c + msDeveloper.Total_Amount__c;
             }
         }
@@ -56,7 +55,7 @@ public with sharing class MilestoneDeveloperTriggerHandler extends TriggerHandle
     }
 
     private void createBillObjForDev(List<Milestone_Developer__c> milestoneDevelopers) {
-        Id developerRecordTypeId = Schema.SObjectType.Bill__c.getRecordTypeInfosByName().get(Constants.TRANSACTION_RECORD_TYPE_SALARY).getRecordTypeId();
+        Id developerRecordTypeId = Schema.SObjectType.Bill__c.getRecordTypeInfosByName().get(Constants.DEVELOPER_PAYMENT_RECORD_TYPE).getRecordTypeId();
 //        Id fixedCostRecordTypeId = Schema.SObjectType.Milestone_Developer__c.getRecordTypeInfosByName().get(Constants.FIXED_COST).getRecordTypeId();
 //        Id earlyCostRecordTypeId = Schema.SObjectType.Milestone_Developer__c.getRecordTypeInfosByName().get(Constants.EARLY_COST).getRecordTypeId();
         Milestone_Developer__c msDeveloper = new Milestone_Developer__c();

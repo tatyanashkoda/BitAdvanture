@@ -6,14 +6,14 @@ public with sharing class TransactionTriggerHandler extends TriggerHandler {
             Where Name = :Constants.COMPANY_NAME
     ];
 
-//    Id customerRecordType = GetRecordType.getRecordType(Constants.TRANSACTION_RECORD_TYPE_CUSTOMER_PAYMENT);
-//    Id salaryRecordType = GetRecordType.getRecordType(Constants.TRANSACTION_RECORD_TYPE_SALARY);
+//    Id customerRecordType = GetRecordType.getRecordType(Constants.INCOMING_PAYMENT_RECORD_TYPE);
+//    Id salaryRecordType = GetRecordType.getRecordType(Constants.DEVELOPER_PAYMENT_RECORD_TYPE);
 //    Id otherExpenseRecordType = GetRecordType.getRecordType(Constants.TRANSACTION_RECORD_TYPE_OTHER_EXPENSE);
-//    Id moneyFlowRecordType = GetRecordType.getRecordType(Constants.TRANSACTION_RECORD_TYPE_MONEY_FLOW);
-    Id customerRecordType = Schema.SObjectType.Transactions__c.getRecordTypeInfosByName().get(Constants.TRANSACTION_RECORD_TYPE_CUSTOMER_PAYMENT).getRecordTypeId();
-    Id salaryRecordType = Schema.SObjectType.Transactions__c.getRecordTypeInfosByName().get(Constants.TRANSACTION_RECORD_TYPE_SALARY).getRecordTypeId();
+//    Id moneyFlowRecordType = GetRecordType.getRecordType(Constants.MONEY_FLOW_RECORD_TYPE);
+    Id customerRecordType = Schema.SObjectType.Transactions__c.getRecordTypeInfosByName().get(Constants.INCOMING_PAYMENT_RECORD_TYPE).getRecordTypeId();
+    Id salaryRecordType = Schema.SObjectType.Transactions__c.getRecordTypeInfosByName().get(Constants.DEVELOPER_PAYMENT_RECORD_TYPE).getRecordTypeId();
     Id otherExpenseRecordType = Schema.SObjectType.Transactions__c.getRecordTypeInfosByName().get(Constants.TRANSACTION_RECORD_TYPE_OTHER_EXPENSE).getRecordTypeId();
-    Id moneyFlowRecordType = Schema.SObjectType.Transactions__c.getRecordTypeInfosByName().get(Constants.TRANSACTION_RECORD_TYPE_MONEY_FLOW).getRecordTypeId();
+    Id moneyFlowRecordType = Schema.SObjectType.Transactions__c.getRecordTypeInfosByName().get(Constants.MONEY_FLOW_RECORD_TYPE).getRecordTypeId();
 
 
     public override void beforeInsert() {
@@ -151,7 +151,6 @@ public with sharing class TransactionTriggerHandler extends TriggerHandler {
         } else {
             transactions.addError('Can not null field "From Bank Account" or "To Bank Account"');
         }
-
     }
 
     private void updateBudgetForCustomer(Project__c project, Transactions__c transactions) {
@@ -178,8 +177,6 @@ public with sharing class TransactionTriggerHandler extends TriggerHandler {
         } else {
             transactions.addError('Can not null field "To Bank Account"');
         }
-
-
     }
 
     private void updateBudgetForOtherExpense(Company_Budget__c companyBudget, Transactions__c transactions) {
@@ -206,7 +203,6 @@ public with sharing class TransactionTriggerHandler extends TriggerHandler {
         } else {
             transactions.addError('Can not null field "From Bank Account"');
         }
-
     }
 
     private void updateBudgetForSalaty(Project__c project, Transactions__c transactions) {
@@ -249,7 +245,5 @@ public with sharing class TransactionTriggerHandler extends TriggerHandler {
         } else {
             transactions.addError('Can not null field "From Bank Account"');
         }
-
     }
-
 }

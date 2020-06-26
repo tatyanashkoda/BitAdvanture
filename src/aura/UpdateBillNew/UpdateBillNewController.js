@@ -3,7 +3,6 @@
  */
 
 ({
-
     doInit: function (component, event, helper) {
         var action = component.get("c.getRecordTypeName");
         action.setParams({
@@ -26,13 +25,13 @@
         });
         $A.enqueueAction(action);
     },
-    handleUpdateRecord: function (component, event, helper) {
 
+    handleUpdateRecord: function (component, event, helper) {
         component.find("recordEditor").saveRecord($A.getCallback(function (saveResult) {
             if (saveResult.state === "SUCCESS" || saveResult.state === "DRAFT") {
                 component.set("v.newBill", component.get("v.billRecord"));
                 component.set("v.newAmount", component.get("v.billRecord").Amount__c);
-                if (component.get("v.billRecord").Paid__c === true) {
+                if (component.get("v.billRecord").Paid__c === true && component.get("v.billRecord").Create_transaction__c === true) {
                     component.set("v.transaction", true);
                 }
                 console.log("Save completed successfully.");
