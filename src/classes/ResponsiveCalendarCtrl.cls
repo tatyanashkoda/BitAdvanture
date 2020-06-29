@@ -12,8 +12,8 @@ global with sharing class ResponsiveCalendarCtrl {
         TimeZone timeZone = UserInfo.getTimeZone();
 
 
-        List<Event> events = [SELECT Id, Subject,StartDateTime, EndDateTime, WhoId From Event];
-        List<Contact> contacts = [SELECT Id, LastName, FirstName From Contact];
+        List<Event> events = [SELECT Id, Subject,StartDateTime, EndDateTime, WhoId FROM Event];
+        List<Contact> contacts = [SELECT Id, LastName, FirstName FROM Contact];
         List<Free_Time__c> freeTimes = [SELECT Id, End_Time__c, Start_Time__c FROM Free_Time__c];
 
         for (Event objEvent : events) {
@@ -24,11 +24,11 @@ global with sharing class ResponsiveCalendarCtrl {
                 }
             }
             calendarWrapper.Id = objEvent.Id;
-            if (objEvent.StartDateTime != null) {
+            if (objEvent.StartDateTime != NULL) {
                 calendarWrapper.startTime = objEvent.StartDateTime.getTime() + timeZone.getOffset(objEvent.StartDateTime);
             }
 
-            if (objEvent.EndDateTime != null) {
+            if (objEvent.EndDateTime != NULL) {
                 calendarWrapper.endTime = objEvent.EndDateTime.getTime() + timeZone.getOffset(objEvent.EndDateTime);
 
             }
@@ -51,11 +51,11 @@ global with sharing class ResponsiveCalendarCtrl {
 
             freeTime.title = 'Test' ;
             freeTime.Id = objEvent.Id;
-            if (objEvent.Start_Time__c != null) {
+            if (objEvent.Start_Time__c != NULL) {
                 freeTime.startTime = objEvent.Start_Time__c.getTime() + timeZone.getOffset(objEvent.Start_Time__c);
             }
 
-            if (objEvent.End_Time__c != null) {
+            if (objEvent.End_Time__c != NULL) {
                 freeTime.endTime = objEvent.End_Time__c.getTime() + timeZone.getOffset(objEvent.End_Time__c);
 
             }

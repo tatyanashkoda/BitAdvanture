@@ -27,7 +27,7 @@ public with sharing class ProjectTriggerHandler extends TriggerHandler {
                 return;
             }
 
-            if (project.Finished_by__c != null || (oldProject.Finished_by__c != project.Finished_by__c)) {
+            if (project.Finished_by__c != NULL || (oldProject.Finished_by__c != project.Finished_by__c)) {
                 project.Project_is_finished__c = true;
                 project.Status__c = Constants.STATUS_CLOSED;
             }

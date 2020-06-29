@@ -31,7 +31,7 @@ public with sharing class MilestoneDeveloperTriggerHandler extends TriggerHandle
             msDev = milestoneDeveloper;
             System.Debug('Hello!');
         }
-        if (msDev.Developing_cost__c != null && (msDev.Number_of_Hours__c == null && msDev.Cost_Per_Hour__c == null)) {
+        if (msDev.Developing_cost__c != NULL && (msDev.Number_of_Hours__c == NULL && msDev.Cost_Per_Hour__c == NULL)) {
             msDev.Total_Amount__c = msDev.Developing_cost__c;
         } else {
             msDev.Total_Amount__c = msDev.Cost_Per_Hour__c * msDev.Number_of_Hours__c;
@@ -44,7 +44,12 @@ public with sharing class MilestoneDeveloperTriggerHandler extends TriggerHandle
             msDev = milestoneDeveloper;
         }
 
-        Milestone__c milestone = [SELECT Id, Developing_cost__c, (Select Id, Name, Developing_cost__c,Total_Amount__c From Milestones_Developers__r) FROM Milestone__c WHERE Id = :msDev.Milestone__c];
+        Milestone__c milestone = [
+                SELECT Id, Developing_cost__c, (
+                        SELECT Id, Name, Developing_cost__c,Total_Amount__c
+                        FROM Milestones_Developers__r)
+                FROM Milestone__c
+                WHERE Id = :msDev.Milestone__c];
         milestone.Developing_cost__c = 0;
         if (!milestone.Milestones_Developers__r.isEmpty()) {
             for (Milestone_Developer__c msDeveloper : milestone.Milestones_Developers__r) {
@@ -77,42 +82,42 @@ public with sharing class MilestoneDeveloperTriggerHandler extends TriggerHandle
         insert newBill;
     }
 
-    private void updateBillObjForDev(Milestone_Developer__c milestoneDeveloper) {
-        List<Bill__c> billObjects = [
-                SELECT Amount__c,Paid__c, Id, Description__c,Developer__c,RecordTypeId, Milestone_Developer__c
-                FROM Bill__c
-                Where Milestone_Developer__c = :milestoneDeveloper.Id
-        ];
-        if (billObjects.isEmpty()) {
-            milestoneDeveloper.addError('There are no any bills');
-            return;
-        }
-
-        Decimal billsAmountSum = 0;
-        for (Bill__c bill : billObjects) {
-            billsAmountSum += bill.Amount__c;
-        }
-
-        Decimal newBillAmount = milestoneDeveloper.Total_Amount__c - billsAmountSum;
-        if (newBillAmount < 0) {
-            milestoneDeveloper.addError('The amount cannot be reduced. The bill was paid');
-            return;
-        }
-
-        if (newBillAmount == 0) {
-            return;
-        }
-
-        Bill__c existingBill = billObjects.get(0);
-        Bill__c newBill = new Bill__c(
-                Paid__c = false,
-                Description__c = existingBill.Description__c,
-                Developer__c = existingBill.Developer__c,
-                RecordTypeId = existingBill.RecordTypeId,
-                Milestone_Developer__c = existingBill.Milestone_Developer__c,
-                Amount__c = newBillAmount
-        );
-        insert newBill;
-        update billObjects;
-    }
+//    private void updateBillObjForDev(Milestone_Developer__c milestoneDeveloper) {
+//        List<Bill__c> billObjects = [
+//                SELECT Amount__c,Paid__c, Id, Description__c,Developer__c,RecordTypeId, Milestone_Developer__c
+//                FROM Bill__c
+//                WHERE Milestone_Developer__c = :milestoneDeveloper.Id
+//        ];
+//        if (billObjects.isEmpty()) {
+//            milestoneDeveloper.addError('There are no any bills');
+//            return;
+//        }
+//
+//        Decimal billsAmountSum = 0;
+//        for (Bill__c bill : billObjects) {
+//            billsAmountSum += bill.Amount__c;
+//        }
+//
+//        Decimal newBillAmount = milestoneDeveloper.Total_Amount__c - billsAmountSum;
+//        if (newBillAmount < 0) {
+//            milestoneDeveloper.addError('The amount cannot be reduced. The bill was paid');
+//            return;
+//        }
+//
+//        if (newBillAmount == 0) {
+//            return;
+//        }
+//
+//        Bill__c existingBill = billObjects.get(0);
+//        Bill__c newBill = new Bill__c(
+//                Paid__c = false,
+//                Description__c = existingBill.Description__c,
+//                Developer__c = existingBill.Developer__c,
+//                RecordTypeId = existingBill.RecordTypeId,
+//                Milestone_Developer__c = existingBill.Milestone_Developer__c,
+//                Amount__c = newBillAmount
+//        );
+//        insert newBill;
+//        update billObjects;
+//    }
 }

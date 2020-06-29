@@ -19,7 +19,7 @@ public with sharing class MilestoneTriggerHandler extends TriggerHandler {
             if (oldMilestone.Finished__c == true && ms.Finished__c == false
                     && ms.Status__c == Constants.STATUS_CLOSED) {
                 ms.Status__c = Constants.STATUS_INPROGRESS;
-                ms.Finished_by__c = null;
+                ms.Finished_by__c = NULL;
                 return;
             }
 
@@ -28,7 +28,7 @@ public with sharing class MilestoneTriggerHandler extends TriggerHandler {
                 return;
             }
 
-            if (ms.Finished_by__c != null || (oldMilestone.Finished_by__c != ms.Finished_by__c)) {
+            if (ms.Finished_by__c != NULL || (oldMilestone.Finished_by__c != ms.Finished_by__c)) {
                 ms.Finished__c = true;
                 ms.Status__c = Constants.STATUS_CLOSED;
             }
@@ -38,8 +38,8 @@ public with sharing class MilestoneTriggerHandler extends TriggerHandler {
     private void updateDueDate(List<Milestone__c> milestones) {
         for (Milestone__c ms : milestones) {
             Project__c project = [SELECT Due_date__c FROM Project__c WHERE Id = :ms.Project__c];
-            if (ms.Due_date__c != null && ms.Start_date__c != null) {
-                if (project.Due_date__c == null || project.Due_date__c < ms.Due_date__c) {
+            if (ms.Due_date__c != NULL && ms.Start_date__c != NULL) {
+                if (project.Due_date__c == NULL || project.Due_date__c < ms.Due_date__c) {
                     project.Due_date__c = ms.Due_date__c;
                 }
                 update project;
@@ -57,7 +57,7 @@ public with sharing class MilestoneTriggerHandler extends TriggerHandler {
             if (project.Status__c == Constants.STATUS_CLOSED && project.Project_is_finished__c == true) {
                 project.Status__c = Constants.STATUS_INPROGRESS;
                 project.Project_is_finished__c = false;
-                project.Finished_by__c = null;
+                project.Finished_by__c = NULL;
             }
             update project;
         }

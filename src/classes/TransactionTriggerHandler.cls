@@ -27,41 +27,39 @@ public with sharing class TransactionTriggerHandler extends TriggerHandler {
 
     private void checkUpdate(List<Transactions__c> transactions) {
         Transactions__c trans = new Transactions__c();
-
         for (Transactions__c tr : transactions) {
             trans = tr;
         }
-
         if (trans.RecordTypeId == moneyFlowRecordType) {
             updateMoneyFlow(trans);
         }
-
     }
 
     private void checkProjectBudget(List<Transactions__c> transactions) {
-
         Transactions__c trans = new Transactions__c();
-
         for (Transactions__c tr : transactions) {
             trans = tr;
         }
-
-
         if (trans.RecordTypeId == customerRecordType) {
-            if (trans.Milestone__c != null) {
+            if (trans.Milestone__c != NULL) {
                 Milestone__c milestone = [SELECT Id, Project__c FROM Milestone__c WHERE Id = :trans.Milestone__c];
-                Project__c project = [SELECT Id, Project_budget__c, Name, Whole_Amount__c, Developer_Salary__c FROM Project__c WHERE Id = :milestone.Project__c];
+                Project__c project = [
+                        SELECT Id, Project_budget__c, Name, Whole_Amount__c, Developer_Salary__c
+                        FROM Project__c
+                        WHERE Id = :milestone.Project__c];
                 updateBudgetForCustomer(project, trans);
             } else {
                 trans.addError('Can not null field "Milestone"');
             }
-
         }
 
         if (trans.RecordTypeId == salaryRecordType) {
-            if (trans.Milestone__c != null) {
+            if (trans.Milestone__c != NULL) {
                 Milestone__c milestone = [SELECT Id, Project__c FROM Milestone__c WHERE Id = :trans.Milestone__c];
-                Project__c project = [SELECT Id, Project_budget__c, Name, Whole_Amount__c, Developer_Salary__c FROM Project__c WHERE Id = :milestone.Project__c];
+                Project__c project = [
+                        SELECT Id, Project_budget__c, Name, Whole_Amount__c, Developer_Salary__c
+                        FROM Project__c
+                        WHERE Id = :milestone.Project__c];
                 updateBudgetForSalaty(project, trans);
             } else {
                 trans.addError('Can not null field "Milestone"');
@@ -71,7 +69,6 @@ public with sharing class TransactionTriggerHandler extends TriggerHandler {
         if (trans.RecordTypeId == otherExpenseRecordType) {
             updateBudgetForOtherExpense(companyBudget, trans);
         }
-
         if (trans.RecordTypeId == moneyFlowRecordType) {
             updateMoneyFlow(trans);
         }
@@ -84,19 +81,16 @@ public with sharing class TransactionTriggerHandler extends TriggerHandler {
             if (oldTransactions.isEmpty()) {
                 return;
             }
-
             for (Transactions__c trans : oldTransactions) {
                 if (trans.RecordTypeId == customerRecordType) {
-                    if (trans.To_Account__c == null) {
+                    if (trans.To_Account__c == NULL) {
                         continue;
                     }
-
                     Bank_Account__c toBankAccount = [
                             SELECT Id, Current_Amount__c
                             FROM Bank_Account__c
                             WHERE Id = :trans.To_Account__c
                     ];
-
                     toBankAccount.Current_Amount__c = toBankAccount.Current_Amount__c - trans.Budget__c;
                     update toBankAccount;
                 }
@@ -105,7 +99,6 @@ public with sharing class TransactionTriggerHandler extends TriggerHandler {
                     if (trans.From_Account__c == null) {
                         continue;
                     }
-
                     Bank_Account__c fromBankAccount = [
                             SELECT Id, Current_Amount__c
                             FROM Bank_Account__c
@@ -119,7 +112,7 @@ public with sharing class TransactionTriggerHandler extends TriggerHandler {
     }
 
     private void updateMoneyFlow(Transactions__c transactions) {
-        if (transactions.From_Account__c != null || transactions.To_Account__c != null) {
+        if (transactions.From_Account__c != NULL || transactions.To_Account__c != NULL) {
             Bank_Account__c fromBankAccount = [
                     SELECT Id, Current_Amount__c
                     FROM Bank_Account__c
@@ -130,7 +123,7 @@ public with sharing class TransactionTriggerHandler extends TriggerHandler {
                     FROM Bank_Account__c
                     WHERE Id = :transactions.To_Account__c
             ];
-            if (fromBankAccount.Current_Amount__c != null) {
+            if (fromBankAccount.Current_Amount__c != NULL) {
                 if (fromBankAccount.Current_Amount__c < transactions.Budget__c) {
                     transactions.addError('There are not enough funds in the account to complete the transaction');
                 } else {
@@ -140,12 +133,11 @@ public with sharing class TransactionTriggerHandler extends TriggerHandler {
                 transactions.addError('There are not enough funds in the account to complete the transaction');
             }
 
-            if (toBankAccount.Current_Amount__c != null) {
+            if (toBankAccount.Current_Amount__c != NULL) {
                 toBankAccount.Current_Amount__c = toBankAccount.Current_Amount__c + transactions.Budget__c;
             } else {
                 toBankAccount.Current_Amount__c = transactions.Budget__c;
             }
-
             update fromBankAccount;
             update toBankAccount;
         } else {
@@ -154,18 +146,18 @@ public with sharing class TransactionTriggerHandler extends TriggerHandler {
     }
 
     private void updateBudgetForCustomer(Project__c project, Transactions__c transactions) {
-        if (transactions.To_Account__c != null) {
+        if (transactions.To_Account__c != NULL) {
             Bank_Account__c toBankAccount = [
                     SELECT Id, Current_Amount__c
                     FROM Bank_Account__c
                     WHERE Id = :transactions.To_Account__c
             ];
-            if (toBankAccount.Current_Amount__c != null) {
+            if (toBankAccount.Current_Amount__c != NULL) {
                 toBankAccount.Current_Amount__c = toBankAccount.Current_Amount__c + transactions.Budget__c;
             } else {
                 toBankAccount.Current_Amount__c = transactions.Budget__c;
             }
-            if (project.Whole_Amount__c == null) {
+            if (project.Whole_Amount__c == NULL) {
                 project.Whole_Amount__c = transactions.Budget__c;
             } else {
                 project.Whole_Amount__c = project.Whole_Amount__c + transactions.Budget__c;
@@ -180,14 +172,13 @@ public with sharing class TransactionTriggerHandler extends TriggerHandler {
     }
 
     private void updateBudgetForOtherExpense(Company_Budget__c companyBudget, Transactions__c transactions) {
-        if (transactions.From_Account__c != null) {
+        if (transactions.From_Account__c != NULL) {
             Bank_Account__c fromBankAccount = [
                     SELECT Id, Current_Amount__c
                     FROM Bank_Account__c
                     WHERE Id = :transactions.From_Account__c
             ];
-
-            if (fromBankAccount.Current_Amount__c != null) {
+            if (fromBankAccount.Current_Amount__c != NULL) {
                 if (fromBankAccount.Current_Amount__c < transactions.Budget__c) {
                     transactions.addError('There are not enough funds in the account to complete the transaction');
                 } else {
@@ -206,25 +197,24 @@ public with sharing class TransactionTriggerHandler extends TriggerHandler {
     }
 
     private void updateBudgetForSalaty(Project__c project, Transactions__c transactions) {
-        if (transactions.From_Account__c != null) {
+        if (transactions.From_Account__c != NULL) {
             Bank_Account__c fromBankAccount = [
                     SELECT Id, Current_Amount__c
                     FROM Bank_Account__c
                     WHERE Id = :transactions.From_Account__c
             ];
-
-            if (transactions.Developer__c != null) {
+            if (transactions.Developer__c != NULL) {
                 Developer__c developer = [SELECT Id, Salary__c FROM Developer__c WHERE Id = :transactions.Developer__c];
-                if (fromBankAccount.Current_Amount__c != null) {
+                if (fromBankAccount.Current_Amount__c != NULL) {
                     if (fromBankAccount.Current_Amount__c < transactions.Budget__c) {
                         transactions.addError('There are not enough funds in the account to complete the transaction');
                     } else {
-                        if (project.Developer_Salary__c == null) {
+                        if (project.Developer_Salary__c == NULL) {
                             project.Developer_Salary__c = transactions.Budget__c;
                         } else {
                             project.Developer_Salary__c = project.Developer_Salary__c + transactions.Budget__c;
                         }
-                        if (developer.Salary__c == null) {
+                        if (developer.Salary__c == NULL) {
                             developer.Salary__c = transactions.Budget__c;
                         } else {
                             developer.Salary__c = developer.Salary__c + transactions.Budget__c;
