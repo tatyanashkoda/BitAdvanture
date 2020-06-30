@@ -43,31 +43,37 @@ public with sharing class DataForTests {
     }
 
     public static Milestone_Developer__c createMilestoneDeveloper(String recordTypeName, Milestone__c milestone, Developer__c developer) {
+        Map<String, Id> recordTypeMap = new Map<String, Id>();
+        for(RecordType rt: [SELECT Id, Name FROM RecordType WHERE SobjectType =: 'Milestone_Developer__c']){
+            recordTypeMap.put(rt.Name, rt.Id);
+        }
+
         Milestone_Developer__c md = new Milestone_Developer__c(
                 RecordTypeId = GetRecordType.getRecordType('Milestone_Developer__c', recordTypeName),
                 Name = 'Name',
                 Milestone__c = milestone.Id,
                 Developer__c = developer.Id
         );
-        if (md.RecordType.Name == Constants.EARLY_COST_RECORD_TYPE) {
+        if (md.RecordTypeId == recordTypeMap.get(Constants.FIXED_COST_RECORD_TYPE)) {
             md.Developing_cost__c = 100;
-        } else if (md.RecordType.Name == Constants.FIXED_COST_RECORD_TYPE) {
-            md.Cost_Per_Hour__c = 10;
-            md.Number_of_Hours__c = 10;
+        } else if (md.RecordTypeId == recordTypeMap.get(Constants.EARLY_COST_RECORD_TYPE)) {
+            md.Cost_Per_Hour__c = 5;
+            md.Number_of_Hours__c = 5;
         }
         insert md;
         return md;
     }
 
-    public static Milestone__c createMilestone(String recordTypeName) {
+    public static Milestone__c createMilestone(String recordTypeName, Project__c project) {
         Milestone__c milestone = new Milestone__c(
                 RecordTypeId = GetRecordType.getRecordType('Milestone__c', recordTypeName),
                 Name = 'MilestoneName',
-                Cost__c = 1000,
+                Cost__c = 100000,
                 Developing_cost__c = 200,
                 Start_date__c = Date.today(),
                 Due_date__c = Date.today().addMonths(1),
-                Status__c = 'Upcoming'
+                Status__c = 'Upcoming',
+                Project__c = project.Id
         );
 
         insert milestone;
@@ -78,7 +84,8 @@ public with sharing class DataForTests {
         Project__c project = new Project__c(
                 Name = 'Project 1',
                 Customer__c = customer.Id,
-                Status__c = 'Upcoming'
+                Status__c = 'Upcoming',
+                Project_is_finished__c = false
         );
         insert project;
         return project;
@@ -88,6 +95,26 @@ public with sharing class DataForTests {
         Customer__c customer = new Customer__c(
                 Name = 'Customer1'
         );
+        insert customer;
         return customer;
+    }
+
+    public static Bank_Account__c createBankAccount(Integer amount){
+        Bank_Account__c ba = new Bank_Account__c(
+                Name = 'Bank Account Name',
+                Current_Amount__c = amount
+        );
+        insert ba;
+        return ba;
+    }
+    public static Company_Budget__c createCompanyBudget(){
+        Company_Budget__c cb = new Company_Budget__c(
+                Name = Constants.COMPANY_NAME,
+                Total_Income__c = 10000,
+                Total_Developers_Payment__c = 1000,
+                Total_Other_Expense__c = 10
+        );
+        insert cb;
+        return cb;
     }
 }
